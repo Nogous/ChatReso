@@ -47,11 +47,14 @@ void serveur()
 
 	char* msg = "Connect to server";
 
+
+	client = accept(slisten, (struct sockaddr*)&clientInfo, &clientInfoLeng);
+	if (client == SOCKET_ERROR)
+		cout << "error accept(): " << WSAGetLastError() << endl;
+
 	while (1)
 	{
-		client = accept(slisten, (struct sockaddr*)&clientInfo, &clientInfoLeng);
-		if(client == SOCKET_ERROR)
-			cout << "error accept(): " << WSAGetLastError() << endl;
+		memset(&recvbuf, 0, sizeof(recvbuf));
 
 		if (send(client, msg, strlen(msg), 0) == SOCKET_ERROR)
 			cout << "error send(): " << WSAGetLastError() << endl;
@@ -60,7 +63,7 @@ void serveur()
 			cout << "error recv(): " << WSAGetLastError() << endl;
 		else
 		{
-			cout << "server: " << recvbuf << endl;
+			cout << "server recive: " << recvbuf << endl;
 		}
 	}
 
@@ -105,6 +108,10 @@ void client()
 
 		if(recv(sConnect,recvbuf, 256, 0) == SOCKET_ERROR)
 			cout << "error recv(): " << WSAGetLastError() << endl;
+		else
+		{
+			cout << "client recive: " << recvbuf << endl;
+		}
 
 		cout << "send: ";
 		cin.getline(sendbuf, 256);
