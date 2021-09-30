@@ -4,5 +4,16 @@
 #pragma once
 
 #include <iostream>
+#include <thread>
 
 // TODO: Référencez ici les en-têtes supplémentaires nécessaires à votre programme.
+
+class Server
+{
+public:
+	Server();
+	~Server();
+
+private:
+
+};
