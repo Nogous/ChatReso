@@ -9,11 +9,11 @@
 #include <WinSock2.h>
 #include <Windows.h>
 using namespace std;
+using namespace uqac::network;
 
 #include "LibNetwork.h"
 
-#define PORT 80
-
+/*
 void serveur()
 {
 	char recvbuf[4096];
@@ -187,15 +187,16 @@ void client()
 	WSACleanup();
 
 }
+*/
 
-void lunch(std::unique_ptr<uqac::network::LibNetwork> ptr) {
+void StartServer(std::unique_ptr<uqac::network::LibNetwork> ptr) {
 	ptr->Listen();
 }
-void lunchClient(std::unique_ptr<uqac::network::LibNetwork> ptr) {
+void StartClient(std::unique_ptr<uqac::network::LibNetwork> ptr) {
 	ptr->Connect();
 }
 
-int main()
+int main(int argc, char* argv[])
 {
 	char s[256];
 
@@ -205,22 +206,15 @@ int main()
 
 	std::unique_ptr<uqac::network::LibNetwork> lib(new uqac::network::LibNetwork());
 
-	if (s2 == "2")
+	if (s2 == "y")
 	{
-		std::thread tServer(lunch, std::move(lib));
-		std::thread tClient(lunchClient, std::move(lib));
-		tServer.join();
-		tClient.join();
-	}
-	else if (s2 == "y")
-	{
-		std::thread tServer(lunch, std::move(lib));
+		std::thread tServer(StartServer, std::move(lib));
 		cout << "Server lonch" << endl;
 		tServer.join();
 	}
 	else
 	{
-		std::thread tClient(lunchClient, std::move(lib));
+		std::thread tClient(StartClient, std::move(lib));
 		cout << "client lonch" << endl;
 		tClient.join();
 	}

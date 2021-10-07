@@ -1,4 +1,5 @@
 #include "UDPConnection.h"
+using namespace uqac::network;
 
 void UDPConnection::SendMsg(SOCKET outSock, std::string msg)
 {

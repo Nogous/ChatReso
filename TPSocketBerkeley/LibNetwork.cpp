@@ -12,6 +12,7 @@ using namespace std;
 #include "TCPConnection.h"
 #include "UDPConnection.h"
 #include "Terminal.h"
+using namespace uqac::network;
 
 namespace uqac {
 	namespace network {
@@ -33,6 +34,7 @@ namespace uqac {
 			WSACleanup();
 		}
 
+		/*
 		void LibNetwork::Initialise()
 		{
 			bool isServer = false;
@@ -62,7 +64,7 @@ namespace uqac {
 				return;
 			}
 		}
-
+		*/
 		void LibNetwork::Listen()
 		{
 			Connection* connection;

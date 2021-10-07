@@ -1,5 +1,7 @@
 #include "TCPConnection.h"
 
+using namespace uqac::network;
+
 void TCPConnection::SendMsg(SOCKET outSock, std::string msg)
 {
 	if (send(outSock, msg.c_str(), strlen(msg.c_str()), 0) == SOCKET_ERROR)

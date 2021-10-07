@@ -19,7 +19,7 @@ namespace uqac {
 			void Connect();
 
 		private:
-			void Initialise();
+			//void Initialise();
 		};
 	}
 }

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <Windows.h>
 using namespace std;
+using namespace uqac::network;
 
 Terminal::Terminal()
 {

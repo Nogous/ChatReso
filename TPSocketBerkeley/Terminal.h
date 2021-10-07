@@ -1,14 +1,18 @@
 #pragma once
 #include <WinSock2.h>
 
-class Terminal
-{
-public:
-	Terminal();
-	~Terminal();
+namespace uqac {
+	namespace network {
+		class Terminal
+		{
+		public:
+			Terminal();
+			~Terminal();
 
-	SOCKET Accept(SOCKET slisten);
+			SOCKET Accept(SOCKET slisten);
 
-private:
-	SOCKET client;
-};
+		private:
+			SOCKET client;
+		};
+	}
+}
