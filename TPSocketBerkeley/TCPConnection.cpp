@@ -8,7 +8,7 @@ void TCPConnection::SendMsg(SOCKET outSock, std::string msg)
 
 char* TCPConnection::Receive(SOCKET sConnect)
 {
-	char* recvbuf;
+	char recvbuf[4096];
 
 	memset(&recvbuf, 0, sizeof(recvbuf));
 

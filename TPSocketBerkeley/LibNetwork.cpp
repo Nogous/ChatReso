@@ -165,9 +165,7 @@ namespace uqac {
 			
 			while (true)
 			{
-				connection->Receive(sock);
-
-				//cout << "client recive: " <<  << endl;
+				cout << "client recive: " << connection->Receive(sock) << endl;
 			}
 		}
 

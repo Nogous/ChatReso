@@ -9,7 +9,7 @@ void UDPConnection::SendMsg(SOCKET outSock, std::string msg)
 
 char* UDPConnection::Receive(SOCKET sConnect)
 {
-	char* tmp;
+	char tmp[4096];
 
 	return tmp;
 }
