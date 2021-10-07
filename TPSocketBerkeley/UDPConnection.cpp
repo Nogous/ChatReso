@@ -7,7 +7,9 @@ void UDPConnection::SendMsg(SOCKET outSock, std::string msg)
 		cout << "error send(): " << WSAGetLastError() << endl;
 }
 
-std::string UDPConnection::Receive(SOCKET sConnect)
+char* UDPConnection::Receive(SOCKET sConnect)
 {
-	return std::string();
+	char* tmp;
+
+	return tmp;
 }

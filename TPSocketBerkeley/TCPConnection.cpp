@@ -6,17 +6,14 @@ void TCPConnection::SendMsg(SOCKET outSock, std::string msg)
 		cout << "error send(): " << WSAGetLastError() << endl;
 }
 
-std::string TCPConnection::Receive(SOCKET sConnect)
+char* TCPConnection::Receive(SOCKET sConnect)
 {
 	char* recvbuf;
-
 
 	memset(&recvbuf, 0, sizeof(recvbuf));
 
 	if (recv(sConnect, recvbuf, 256, 0) == SOCKET_ERROR)
 		cout << "error recv(): " << WSAGetLastError() << endl;
 
-	string s(recvbuf);
-
-	return s;
+	return recvbuf;
 }

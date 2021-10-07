@@ -165,7 +165,9 @@ namespace uqac {
 			
 			while (true)
 			{
-				cout << "client recive: " << connection->Receive(sock) << endl;
+				connection->Receive(sock);
+
+				//cout << "client recive: " <<  << endl;
 			}
 		}
 
@@ -220,6 +222,7 @@ namespace uqac {
 				connection->SendMsg(sConnect, sendbuf);
 			}
 
+			cout << "wat?";
 			closesocket(sConnect);
 		}
 
