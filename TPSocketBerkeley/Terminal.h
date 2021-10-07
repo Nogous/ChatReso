@@ -1,4 +1,5 @@
 #pragma once
+#include <WinSock2.h>
 
 class Terminal
 {
@@ -6,6 +7,8 @@ public:
 	Terminal();
 	~Terminal();
 
-private:
+	SOCKET Accept(SOCKET slisten);
 
+private:
+	SOCKET client;
 };

@@ -10,6 +10,8 @@
 #include <Windows.h>
 using namespace std;
 
+#include "LibNetwork.h"
+
 #define PORT 80
 
 void serveur()
@@ -186,6 +188,10 @@ void client()
 
 }
 
+void lunch(std::unique_ptr<uqac::network::LibNetwork> ptr) {
+	ptr->Listen();
+}
+
 int main()
 {
 	char s[256];
@@ -194,9 +200,11 @@ int main()
 	cin.getline(s, 256);
 	string s2(s);
 
+	std::unique_ptr<uqac::network::LibNetwork> lib(new uqac::network::LibNetwork());
+
 	if (s2 == "2")
 	{
-		std::thread tServer(serveur);
+		std::thread tServer(lunch, std::move(lib));
 		cout << "Server lonch" << endl;
 		std::thread tClient(client);
 		cout << "client lonch" << endl;
@@ -205,7 +213,7 @@ int main()
 	}
 	else if (s2 == "y")
 	{
-		std::thread tServer(serveur);
+		std::thread tServer(lunch, std::move(lib));
 		cout << "Server lonch" << endl;
 		tServer.join();
 	}
