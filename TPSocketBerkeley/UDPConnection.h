@@ -4,11 +4,9 @@
 class UDPConnection : public Connection
 {
 public:
-	UDPConnection();
-	~UDPConnection();
 
-	void SendMsg();
-	void Receive();
+	void SendMsg(SOCKET outSock, std::string msg) override;
+	std::string Receive(SOCKET sConnect) override;
 
 private:
 

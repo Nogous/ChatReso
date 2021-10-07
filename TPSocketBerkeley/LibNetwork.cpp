@@ -84,11 +84,11 @@ namespace uqac {
 
 			if (protocol == "TCP")
 			{
-				connection = new TCPConnection();
+				connection = new TCPConnection;
 			}
 			else
 			{
-				connection = new UDPConnection();
+				connection = new UDPConnection;
 			}
 
 			int infoLeng = sizeof(info);
@@ -147,8 +147,7 @@ namespace uqac {
 								SOCKET outSock = master.fd_array[i];
 								if (outSock != slisten && outSock != sock)
 								{
-									if (send(outSock, msg.c_str(), strlen(msg.c_str()), 0) == SOCKET_ERROR)
-										cout << "error send(): " << WSAGetLastError() << endl;
+									connection->SendMsg(outSock, msg);
 								}
 							}
 						}
@@ -160,8 +159,70 @@ namespace uqac {
 			closesocket(slisten);
 		}
 
+		void Receiver(SOCKET sock) {
+
+			Connection* connection = new TCPConnection;
+
+			while (true)
+			{
+				cout << "client recive: " << connection->Receive(sock) << endl;
+			}
+		}
+
 		void LibNetwork::Connect()
 		{
+			Connection* connection;
+
+			// creat socket
+			SOCKET sConnect;
+
+			sConnect = socket(AF_INET, SOCK_STREAM, 0);
+			if (sConnect == INVALID_SOCKET)
+				cout << "error socket(): " << WSAGetLastError() << endl;
+
+			// bind ip address and port
+			sockaddr_in info;
+			info.sin_addr.s_addr = inet_addr(ip.c_str());
+			info.sin_family = AF_INET;
+			info.sin_port = htons(port);
+			int infoLeng = sizeof(info);
+
+			if (protocol == "TCP")
+			{
+				connection = new TCPConnection;
+			}
+			else
+			{
+				connection = new UDPConnection;
+			}
+
+			// connect to serveur
+			if (connect(sConnect, (struct sockaddr*)&info, infoLeng) == SOCKET_ERROR)
+			{
+				cout << "error connect(): " << WSAGetLastError() << endl;
+
+				closesocket(sConnect);
+				WSACleanup();
+				return;
+			}
+
+			std::thread receive(Receiver, sConnect);
+
+			char sendbuf[256];
+
+			while (true)
+			{
+				memset(&sendbuf, 0, sizeof(sendbuf));
+
+				cout << "send: ";
+				cin.getline(sendbuf, 256);
+
+				connection->SendMsg(sConnect, sendbuf);
+			}
+
+			closesocket(sConnect);
 		}
+
+
 	}
 }

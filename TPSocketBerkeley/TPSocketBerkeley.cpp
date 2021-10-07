@@ -191,6 +191,9 @@ void client()
 void lunch(std::unique_ptr<uqac::network::LibNetwork> ptr) {
 	ptr->Listen();
 }
+void lunchClient(std::unique_ptr<uqac::network::LibNetwork> ptr) {
+	ptr->Connect();
+}
 
 int main()
 {
@@ -205,9 +208,7 @@ int main()
 	if (s2 == "2")
 	{
 		std::thread tServer(lunch, std::move(lib));
-		cout << "Server lonch" << endl;
-		std::thread tClient(client);
-		cout << "client lonch" << endl;
+		std::thread tClient(lunchClient, std::move(lib));
 		tServer.join();
 		tClient.join();
 	}
@@ -219,7 +220,7 @@ int main()
 	}
 	else
 	{
-		std::thread tClient(client);
+		std::thread tClient(lunchClient, std::move(lib));
 		cout << "client lonch" << endl;
 		tClient.join();
 	}

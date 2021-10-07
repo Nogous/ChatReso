@@ -1,17 +1,22 @@
 #include "TCPConnection.h"
 
-TCPConnection::TCPConnection()
+void TCPConnection::SendMsg(SOCKET outSock, std::string msg)
 {
+	if (send(outSock, msg.c_str(), strlen(msg.c_str()), 0) == SOCKET_ERROR)
+		cout << "error send(): " << WSAGetLastError() << endl;
 }
 
-TCPConnection::~TCPConnection()
+std::string TCPConnection::Receive(SOCKET sConnect)
 {
-}
+	char* recvbuf;
 
-void TCPConnection::SendMsg()
-{
-}
 
-void TCPConnection::Receive()
-{
+	memset(&recvbuf, 0, sizeof(recvbuf));
+
+	if (recv(sConnect, recvbuf, 256, 0) == SOCKET_ERROR)
+		cout << "error recv(): " << WSAGetLastError() << endl;
+
+	string s(recvbuf);
+
+	return s;
 }

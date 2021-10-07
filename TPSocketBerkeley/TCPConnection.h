@@ -4,11 +4,9 @@
 class TCPConnection : public Connection
 {
 public:
-	TCPConnection();
-	~TCPConnection();
 
-	void SendMsg();
-	void Receive();
+	void SendMsg(SOCKET outSock, std::string msg) override;
+	std::string Receive(SOCKET sConnect) override;
 
 private:
 

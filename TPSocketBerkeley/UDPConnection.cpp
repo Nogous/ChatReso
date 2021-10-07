@@ -1,17 +1,13 @@
 #include "UDPConnection.h"
 
-UDPConnection::UDPConnection()
+void UDPConnection::SendMsg(SOCKET outSock, std::string msg)
 {
+	// a changer
+	if (send(outSock, msg.c_str(), strlen(msg.c_str()), 0) == SOCKET_ERROR)
+		cout << "error send(): " << WSAGetLastError() << endl;
 }
 
-UDPConnection::~UDPConnection()
+std::string UDPConnection::Receive(SOCKET sConnect)
 {
-}
-
-void UDPConnection::SendMsg()
-{
-}
-
-void UDPConnection::Receive()
-{
+	return std::string();
 }
