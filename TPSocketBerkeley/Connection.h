@@ -10,7 +10,7 @@ public:
 	~Connection();
 
 	virtual void SendMsg(SOCKET outSock, std::string msg) {};
-	virtual std::string Receive(SOCKET sConnect);
+	virtual std::string Receive(SOCKET sConnect) = 0;
 
 private:
 

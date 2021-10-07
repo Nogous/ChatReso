@@ -162,7 +162,7 @@ namespace uqac {
 		void Receiver(SOCKET sock) {
 
 			Connection* connection = new TCPConnection;
-
+			
 			while (true)
 			{
 				cout << "client recive: " << connection->Receive(sock) << endl;
