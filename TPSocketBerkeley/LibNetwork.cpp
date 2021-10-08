@@ -22,7 +22,19 @@ namespace uqac::network {
 		if (WSAStartup(DllVersion, &wsData) != 0)
 			ExitProcess(EXIT_FAILURE);
 
-		//Initialise();
+	}
+
+	LibNetwork::LibNetwork(std::string desiredProtocol, std::string desiredIp, int desiredPort)
+	{
+		// Init WISOCK
+		WSADATA wsData;
+		WORD DllVersion = MAKEWORD(2, 1);
+		if (WSAStartup(DllVersion, &wsData) != 0)
+			ExitProcess(EXIT_FAILURE);
+
+		ip = desiredIp;
+		protocol = desiredProtocol;
+		port = desiredPort;
 	}
 
 	LibNetwork::~LibNetwork()
@@ -138,7 +150,6 @@ namespace uqac::network {
 		{
 			msg = (connection->Receive(sock));
 			callback(msg);
-			//std::cout << "client recive: " << msg.c_str() << std::endl;
 		}
 	}
 
@@ -187,7 +198,6 @@ namespace uqac::network {
 		{
 			memset(&sendbuf, 0, sizeof(sendbuf));
 
-			std::cout << "send: ";
 			std::cin.getline(sendbuf, 256);
 
 			connection->SendMsg(sConnect, sendbuf);

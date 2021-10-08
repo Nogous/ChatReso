@@ -15,7 +15,7 @@ using namespace uqac::network;
 void OnReceiveMsg(std::string s)
 {
 	
-	cout << s.c_str();
+	cout << "receive : "<<s.c_str() << endl;
 }
 
 void StartServer(std::unique_ptr<uqac::network::LibNetwork> ptr) {
@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 {
 	if (argc == 5)
 	{
-		std::unique_ptr<LibNetwork> lib(new LibNetwork(argv[2], argv[3], stoi(argv[4])));
+		std::unique_ptr<LibNetwork> lib(new LibNetwork(string(argv[2]), string(argv[3]), atoi(argv[4])));
 	
 		if (argv[1] == string("server"))
 		{
