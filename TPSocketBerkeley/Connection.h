@@ -1,7 +1,6 @@
 #pragma once
 #include <WinSock2.h>
 #include <iostream>
-using namespace std;
 
 namespace uqac {
 	namespace network {

@@ -1,22 +1,21 @@
 #pragma once
 #include <iostream>
+#include <functional>
 
-namespace uqac {
-	namespace network {
+namespace uqac::network {
 
-		class LibNetwork
-		{
-		public:
-			LibNetwork();
-			~LibNetwork();
+	class LibNetwork
+	{
+	public:
+		LibNetwork();
+		~LibNetwork();
 
-			std::string protocol = "UDP";
-			std::string ip = "192.168.2.12";
-			int port = 25565;
+		std::string protocol = "UDP";
+		std::string ip = "127.0.0.1";
+		int port = 25565;
 
 
-			void Listen();
-			void Connect();
-		};
-	}
+		void Listen();
+		void Connect(std::function<void(std::string)> callback);
+	};
 }

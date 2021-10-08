@@ -12,15 +12,27 @@
 using namespace std;
 
 
+void OnReceiveMsg(std::string s)
+{
+	
+	cout << s.c_str();
+}
+
 void StartServer(std::unique_ptr<uqac::network::LibNetwork> ptr) {
 	ptr->Listen();
 }
 void StartClient(std::unique_ptr<uqac::network::LibNetwork> ptr) {
-	ptr->Connect();
+
+	std::function<void(std::string)> callback;
+	callback = OnReceiveMsg;
+
+	ptr->Connect(callback);
 }
+
 
 int main(int argc, char* argv[])
 {
+
 	char s[256];
 
 	cout << "is server (y/n)" << endl;

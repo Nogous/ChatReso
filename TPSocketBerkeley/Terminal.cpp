@@ -23,6 +23,8 @@ SOCKET Terminal::Accept(SOCKET slisten)
 	if (client == SOCKET_ERROR)
 		cout << "error accept(): " << WSAGetLastError() << endl;
 
+	//callback send welcome message
+
 	//char* welcomMsg = "Connect to server\n";
 	// send welcome msg
 	//if (send(client, welcomMsg, strlen(welcomMsg), 0) == SOCKET_ERROR)

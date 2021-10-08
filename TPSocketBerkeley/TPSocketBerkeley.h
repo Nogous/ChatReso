@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <thread>
+#include <functional>
 
 // TODO: Référencez ici les en-têtes supplémentaires nécessaires à votre programme.
 
