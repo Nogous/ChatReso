@@ -11,15 +11,12 @@ namespace uqac {
 			~LibNetwork();
 
 			std::string protocol = "UDP";
-			std::string ip = "127.0.0.1";
-			int port = 80;
+			std::string ip = "192.168.2.12";
+			int port = 25565;
 
 
 			void Listen();
 			void Connect();
-
-		private:
-			//void Initialise();
 		};
 	}
 }

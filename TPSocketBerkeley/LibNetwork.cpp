@@ -34,37 +34,6 @@ namespace uqac {
 			WSACleanup();
 		}
 
-		/*
-		void LibNetwork::Initialise()
-		{
-			bool isServer = false;
-			string respond;
-
-			cout << "Initialise as Server (y/n)\n";
-			cin >> respond;
-			if (respond == "y" || respond == "yes")
-				isServer = true;
-
-			cout << "Use UDP on LOCAL HOST? (y/n)\n";
-			cin >> respond;
-
-			if (respond == "y" || respond == "yes") {
-				if (isServer)
-					Listen();
-				else
-					Connect();
-			}
-			else if (respond == "n" || respond == "no")
-			{
-				// configurer a la main
-			}
-			else
-			{
-				Initialise();
-				return;
-			}
-		}
-		*/
 		void LibNetwork::Listen()
 		{
 			Connection* connection;
@@ -222,7 +191,6 @@ namespace uqac {
 				connection->SendMsg(sConnect, sendbuf);
 			}
 
-			cout << "wat?";
 			closesocket(sConnect);
 		}
 
