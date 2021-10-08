@@ -10,7 +10,7 @@
 #include <Windows.h>
 #include "LibNetwork.h"
 using namespace std;
-
+using namespace uqac::network;
 
 void OnReceiveMsg(std::string s)
 {
@@ -32,27 +32,33 @@ void StartClient(std::unique_ptr<uqac::network::LibNetwork> ptr) {
 
 int main(int argc, char* argv[])
 {
-
-	char s[256];
-
-	cout << "is server (y/n)" << endl;
-	cin.getline(s, 256);
-	string s2(s);
-
-	std::unique_ptr<uqac::network::LibNetwork> lib(new uqac::network::LibNetwork());
-
-	if (s2 == "y")
+	if (argc == 5)
 	{
-		std::thread tServer(StartServer, std::move(lib));
-		cout << "Server launch" << endl;
-		tServer.join();
+		std::unique_ptr<LibNetwork> lib(new LibNetwork(argv[2], argv[3], stoi(argv[4])));
+	
+		if (argv[1] == string("server"))
+		{
+			std::thread tServer(StartServer, std::move(lib));
+			cout << "Server launch" << endl;
+			tServer.join();
+		}
+		else if (argv[1] == string("client"))
+		{
+			std::thread tClient(StartClient, std::move(lib));
+			cout << "client launch" << endl;
+			tClient.join();
+		}
+		else
+		{
+			return EXIT_FAILURE;
+		}
 	}
 	else
 	{
+		std::unique_ptr<LibNetwork> lib(new LibNetwork());
 		std::thread tClient(StartClient, std::move(lib));
 		cout << "client launch" << endl;
 		tClient.join();
 	}
-
 	return 0;
 }

@@ -8,6 +8,7 @@ namespace uqac::network {
 	{
 	public:
 		LibNetwork();
+		LibNetwork(std::string protocol, std::string ip, int port) : protocol(protocol),ip(ip),port(port){}
 		~LibNetwork();
 
 		std::string protocol = "UDP";
